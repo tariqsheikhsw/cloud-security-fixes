@@ -9,7 +9,7 @@ while IFS= read -r INSTANCE_ID
 do
 
 echo "Processing instance ID: $INSTANCE_ID"
-Step 1: Create a snapshot of the EBS root volume of the affected instance
+: ' # Step 1: Create a snapshot of the EBS root volume of the affected instance '
 
 ROOT_VOLUME_ID=$(aws ec2 describe-instances --instance-id $INSTANCE_ID --query "Reservations[].Instances[].BlockDeviceMappings[?DeviceName==`/dev/sda1`].Ebs.VolumeId" --output text)
 
