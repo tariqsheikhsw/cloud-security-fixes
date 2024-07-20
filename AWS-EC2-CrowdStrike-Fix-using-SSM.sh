@@ -26,7 +26,7 @@ NEW_VOLUME_ID=$(aws ec2 create-volume --snapshot-id $SNAPSHOT_ID --availability-
 
 NEW_INSTANCE_ID=$(aws ec2 run-instances --image-id <new-windows-ami-id> --instance-type <instance-type> --key-name <key-pair> --subnet-id <subnet-id> --security-group-ids <security-group-id> --placement "AvailabilityZone=$AVAILABILITY_ZONE" --query "Instances[0].InstanceId" --output text)
 
-#Step 4: Attach the EBS volume from step (2) to the new Windows instance as a data volume
+# Step 4: Attach the EBS volume from step (2) to the new Windows instance as a data volume
 
 aws ec2 attach-volume --volume-id $NEW_VOLUME_ID --instance-id $NEW_INSTANCE_ID --device /dev/sdf
 Wait for the volume to be attached
