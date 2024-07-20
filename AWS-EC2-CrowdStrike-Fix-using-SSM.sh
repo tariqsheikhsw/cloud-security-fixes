@@ -19,7 +19,8 @@ Step 2: Create a new EBS Volume from the snapshot in the same availability zone
 AVAILABILITY_ZONE=$(aws ec2 describe-instances --instance-id $INSTANCE_ID --query "Reservations[].Instances[].Placement.AvailabilityZone" --output text)
 
 NEW_VOLUME_ID=$(aws ec2 create-volume --snapshot-id $SNAPSHOT_ID --availability-zone $AVAILABILITY_ZONE --query "VolumeId" --output text)
-Step 3: Launch a new Windows instance in that availability zone using a different version of Windows
+
+### Step 3: Launch a new Windows instance in that availability zone using a different version of Windows
 
 NEW_INSTANCE_ID=$(aws ec2 run-instances --image-id <new-windows-ami-id> --instance-type <instance-type> --key-name <key-pair> --subnet-id <subnet-id> --security-group-ids <security-group-id> --placement "AvailabilityZone=$AVAILABILITY_ZONE" --query "Instances[0].InstanceId" --output text)
 Step 4: Attach the EBS volume from step (2) to the new Windows instance as a data volume
